@@ -60,11 +60,11 @@ swiming-vue
 │    │    │    ├─ roleManage.vue  角色管理页面
 │    │    │    └─ userManage.vue  用户管理页面
 │    │    ├─ login  登录页面
-│    │    │           └─ login.vue  登录页面
+│    │    │    └─ login.vue  登录页面
 │    │    ├─ register  注册页面
-│    │    │           └─ register.vue   注册页面
+│    │    │    └─ register.vue   注册页面
 │    │    └─ home  主页
-│    │           └─ HomeView.vue  主页
+│    │        └─ HomeView.vue  主页
 │    ├─ 404.vue  404页面
 │    └─ Layout.vue  布局文件
 ├─ App.vue  入口文件
