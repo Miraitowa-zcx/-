@@ -1,62 +1,80 @@
 # vue
 
 ## Project setup
+
 ```
 npm install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
 npm run serve
 ```
 
 ### Compiles and minifies for production
+
 ```
 npm run build
 ```
 
 ### Customize configuration
+
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-```html
+<br>
 
-<template>
-    <div class="hello">
-        <h1>{{ msg }}</h1>
-        <h2>Essential Links</h2>
-        <ul>
-            <li>
-                <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>
-            </li>
-            <li>
-                <a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a>
-            </li>
-            <li>
-                <a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a>
-            </li>
-            <li>
-                <a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a>
-            </li>
-            <li>
-                <a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a>
-            </li>
-        </ul>
-        <h2>Ecosystem</h2>
-        <ul>
-            <li>
-                <a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a>
-            </li>
-            <li>
-                <a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a>
-            </li>
-            <li>
-                <a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank></a>
-            </li>
-      <li>
-        <a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue</a>
-            </li>
-        </ul>
-    </div>
-</template>
+**项目结构**
+
 ```
+swiming-vue
+├─public  静态资源文件夹
+│    ├─ favicon.ico  图标
+│    └─ index.html  网页
+├─src  源代码文件夹
+│    ├─ assets  资源文件夹
+│    │    ├─ globals.scss  全局样式文件
+│    │    └─ logo.png  logo图片
+│    ├─ components  组件文件夹
+│    │    └─ mouseMove.vue  鼠标组件
+│    ├─ routes  路由文件夹
+│    │        └─ index.js  路由文件
+│    ├─ utils  工具文件夹
+│    │        └─ request.js  请求文件
+│    ├─ views  页面文件夹
+│    │    ├─ camera  摄像头页面
+│    │    │    └─ deviceList.vue  摄像头列表页面
+│    │    ├─ data  数据页面
+│    │    │    ├─ device  设备页面
+│    │    │    │    ├─ deviceInfo.vue  设备信息页面
+│    │    │    │    ├─ editDeviceInfo.vue  修改设备信息页面
+│    │    │    │    └─ addDeviceInfo.vue  添加设备信息页面
+│    │    │    └─ event  事件页面
+│    │    │           ├─ eventInfo.vue  事件信息页面
+│    │    │           ├─ editEventInfo.vue  修改事件信息页面
+│    │    │           └─ addEventInfo.vue  添加事件信息页面
+│    │    ├─ system  系统页面
+│    │    │    ├─ systemDictionary.vue  系统字典页面
+│    │    │    └─ systemMenu.vue  系统菜单页面
+│    │    ├─ user  用户页面
+│    │    │    ├─ roleManage.vue  角色管理页面
+│    │    │    └─ userManage.vue  用户管理页面
+│    │    ├─ login  登录页面
+│    │    │           └─ login.vue  登录页面
+│    │    ├─ register  注册页面
+│    │    │           └─ register.vue   注册页面
+│    │    └─ home  主页
+│    │           └─ HomeView.vue  主页
+│    ├─ 404.vue  404页面
+│    └─ Layout.vue  布局文件
+├─ App.vue  入口文件
+├─ main.js  入口文件
+├─ babel.config.js  配置文件
+├─ jsconfig.json  配置文件
+├─ package.json  配置文件
+├─ package-lock.json  配置文件
+├─ vue.config.js  配置文件
+└─ README.md  自述文件
+```
+
 

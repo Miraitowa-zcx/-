@@ -8,7 +8,7 @@ Vue.use(VueRouter)
 const routes = [
 
     //  ===   登录   ===
-    {path: '/login', name: 'Login', component: () => import('@/views/login/Login.vue')},
+    {path: '/login', name: 'Login', component: () => import('@/views/login/login.vue')},
 
     //  ===   注册   ===
     {path: '/register', name: 'Register', component: () => import('@/views/register/register.vue')},
@@ -37,12 +37,12 @@ const routes = [
             {path: 'addEventInfo', name: 'AddEventInfo', component: () => import('@/views/data/event/addEventInfo.vue')},
 
             //  ===   系统管理  ===
-            {path: 'systemMenu', name: 'SystemMenu', component: () => import('@/views/system/SystemMenu.vue')},
-            {path: 'systemDictionary', name: 'SystemDictionary', component: () => import('@/views/system/SystemDictionary.vue')},
+            {path: 'systemMenu', name: 'SystemMenu', component: () => import('@/views/system/systemMenu.vue')},
+            {path: 'systemDictionary', name: 'SystemDictionary', component: () => import('@/views/system/systemDictionary.vue')},
 
             //  ===   用户管理  ===
-            {path: 'userManage', name: 'UserManage', component: () => import('@/views/user/UserManage.vue')},
-            {path: 'roleManage', name: 'RoleManage', component: () => import('@/views/user/RoleManage.vue')}
+            {path: 'userManage', name: 'UserManage', component: () => import('@/views/user/userManage.vue')},
+            {path: 'roleManage', name: 'RoleManage', component: () => import('@/views/user/roleManage.vue')}
         ]
     },
     {path: "*", component: () => import('@/views/404.vue')}
