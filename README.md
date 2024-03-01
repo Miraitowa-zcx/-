@@ -28,10 +28,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ```
 swiming-vue
-├─public  静态资源文件夹
+├─ public  静态资源文件夹
 │    ├─ favicon.ico  图标
 │    └─ index.html  网页
-├─src  源代码文件夹
+├─ src  源代码文件夹
 │    ├─ assets  资源文件夹
 │    │    ├─ globals.scss  全局样式文件
 │    │    └─ logo.png  logo图片
