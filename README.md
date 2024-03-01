@@ -38,9 +38,9 @@ swiming-vue
 │    ├─ components  组件文件夹
 │    │    └─ mouseMove.vue  鼠标组件
 │    ├─ routes  路由文件夹
-│    │        └─ index.js  路由文件
+│    │    └─ index.js  路由文件
 │    ├─ utils  工具文件夹
-│    │        └─ request.js  请求文件
+│    │    └─ request.js  请求文件
 │    ├─ views  页面文件夹
 │    │    ├─ camera  摄像头页面
 │    │    │    └─ deviceList.vue  摄像头列表页面
