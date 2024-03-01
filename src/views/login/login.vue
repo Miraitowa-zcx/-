@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100vh; overflow: hidden; position: relative;" class="background">
-    <el-card class="cover" v-if="loginAdmin.id">
+    <el-card class="" v-if="loginAdmin.id">
       <slide-verify :l="42"
                     :r="10"
                     :w="310"

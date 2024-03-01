@@ -3,16 +3,74 @@
     <div style="margin: 20px 0">
       <el-select class="input" v-model="timeRange" placeholder="请选择" @change="load">
         <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
         </el-option>
       </el-select>
     </div>
     <el-card>
       <div id="line" style="width: 100%; height: 400px;"></div>
     </el-card>
+
+    <div style="margin: 20px 0">
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <div>
+            <el-statistic
+                group-separator=","
+                :precision="2"
+                :value="value2"
+                :title="title"
+            ></el-statistic>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div>
+            <el-statistic title="男女比">
+              <template slot="formatter">
+                456/2
+              </template>
+            </el-statistic>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div>
+            <el-statistic
+                group-separator=","
+                :precision="2"
+                decimal-separator="."
+                :value="value1"
+                :title="title"
+            >
+              <template slot="prefix">
+                <i class="el-icon-s-flag" style="color: red"></i>
+              </template>
+              <template slot="suffix">
+                <i class="el-icon-s-flag" style="color: blue"></i>
+              </template>
+            </el-statistic>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div>
+            <el-statistic :value="like ? 521 : 520" title="Feedback">
+              <template slot="suffix">
+              <span @click="like = !like" class="like">
+                <i
+                    class="el-icon-star-on"
+                    style="color:red"
+                    v-show="!!like"
+                ></i>
+                <i class="el-icon-star-off" v-show="!like"></i>
+              </span>
+              </template>
+            </el-statistic>
+          </div>
+        </el-col>
+      </el-row>
+    </div>
   </div>
 </template>
 
@@ -29,7 +87,7 @@ const option = {
     trigger: 'axis'
   },
   legend: {
-    data: [ '信息-1', '信息-2' ]
+    data: ['信息-1', '信息-2']
   },
   grid: {
     left: '3%',
@@ -70,19 +128,23 @@ const option = {
 
 export default {
   data() {
-      return {
-        return: [],
-        borrow: [],
-        admin: Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : {},
-        lineBox: null,
-        timeRange: 'week',
-        options: [
-            { value: 'week', label: '最近一周' },
-            { value: 'month', label: '最近一个月' },
-            { value: 'month2', label: '最近两个月' },
-            { value: 'month3', label: '最近三个月' }
-        ]
-      }
+    return {
+      like: true,
+      value1: 4154.564,
+      value2: 1314,
+      title: "增长人数",
+      return: [],
+      borrow: [],
+      admin: Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : {},
+      lineBox: null,
+      timeRange: 'week',
+      options: [
+        {value: 'week', label: '最近一周'},
+        {value: 'month', label: '最近一个月'},
+        {value: 'month2', label: '最近两个月'},
+        {value: 'month3', label: '最近三个月'}
+      ]
+    }
   },
   mounted() {
     this.load()
@@ -106,5 +168,11 @@ export default {
 <style>
 .input {
   width: 300px;
+}
+
+.like {
+  cursor: pointer;
+  font-size: 25px;
+  display: inline-block;
 }
 </style>
