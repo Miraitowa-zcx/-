@@ -11,3 +11,13 @@ body {
 th {
     background-color: aliceblue !important;
 }
+
+.background {
+    position: absolute;
+    background-image: url("@/assets/image.webp");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
+}
