@@ -50,9 +50,9 @@ swiming-vue
 │    │    │    │    ├─ editDeviceInfo.vue  修改设备信息页面
 │    │    │    │    └─ addDeviceInfo.vue  添加设备信息页面
 │    │    │    └─ event  事件页面
-│    │    │           ├─ eventInfo.vue  事件信息页面
-│    │    │           ├─ editEventInfo.vue  修改事件信息页面
-│    │    │           └─ addEventInfo.vue  添加事件信息页面
+│    │    │        ├─ eventInfo.vue  事件信息页面
+│    │    │        ├─ editEventInfo.vue  修改事件信息页面
+│    │    │        └─ addEventInfo.vue  添加事件信息页面
 │    │    ├─ system  系统页面
 │    │    │    ├─ systemDictionary.vue  系统字典页面
 │    │    │    └─ systemMenu.vue  系统菜单页面
