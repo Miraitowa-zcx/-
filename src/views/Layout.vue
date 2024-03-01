@@ -28,7 +28,8 @@
     <div style="display: flex; z-index: 1">
 
       <!-- 侧边栏导航 -->
-      <div style="width: 200px; min-height: calc(100vh - 62px); overflow: hidden; margin-right: 2px; background-color: white;">
+      <div
+          style="width: 200px; min-height: calc(100vh - 62px); overflow: hidden; margin-right: 2px; background-color: white;">
         <el-menu :default-active="$route.path" router class="el-menu-demo" style="margin-bottom: 10px;">
           <el-menu-item index="/">
             <i class="el-icon-s-home"></i>
@@ -43,13 +44,22 @@
             <el-menu-item index="/deviceList">设备列表</el-menu-item>
           </el-submenu>
 
-          <el-submenu index="data">
+          <el-submenu index="device">
             <template slot="title">
               <i class="el-icon-info"></i>
               <span>设备数据</span>
             </template>
             <el-menu-item index="/deviceInfo">设备信息</el-menu-item>
+            <el-menu-item index="/addDeviceInfo">设备添加</el-menu-item>
+          </el-submenu>
+
+          <el-submenu index="event">
+            <template slot="title">
+              <i class="el-icon-s-claim"></i>
+              <span>事件数据</span>
+            </template>
             <el-menu-item index="/eventInfo">事件信息</el-menu-item>
+            <el-menu-item index="/addEventInfo">事件添加</el-menu-item>
           </el-submenu>
 
           <el-submenu index="system">
@@ -88,9 +98,9 @@ import mouseMove from "@/components/mouseMove.vue"
 export default {
   name: 'Layout',
   data() {
-      return {
-        admin: Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : {}
-      }
+    return {
+      admin: Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : {}
+    }
   },
   methods: {
     logout() {

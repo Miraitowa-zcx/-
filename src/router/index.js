@@ -27,8 +27,14 @@ const routes = [
             {path: 'deviceList', name: 'DeviceList', component: () => import('@/views/camera/deviceList.vue')},
 
             //  ===   设备数据   ====
-            {path: 'deviceInfo', name: 'DeviceInfo', component: () => import('@/views/data/deviceInfo.vue')},
-            {path: 'eventInfo', name: 'EventInfo', component: () => import('@/views/data/eventInfo.vue')},
+            {path: 'deviceInfo', name: 'DeviceInfo', component: () => import('@/views/data/device/deviceInfo.vue')},
+            {path: 'editDeviceInfo', name: 'EditDeviceInfo', component: () => import('@/views/data/device/editDeviceInfo.vue')},
+            {path: 'addDeviceInfo', name: 'AddDeviceInfo', component: () => import('@/views/data/device/addDeviceInfo.vue')},
+
+            //  ===   事件数据   ===
+            {path: 'eventInfo', name: 'EventInfo', component: () => import('@/views/data/event/eventInfo.vue')},
+            {path: 'editEventInfo', name: 'EditEventInfo', component: () => import('@/views/data/event/editEventInfo.vue')},
+            {path: 'addEventInfo', name: 'AddEventInfo', component: () => import('@/views/data/event/addEventInfo.vue')},
 
             //  ===   系统管理  ===
             {path: 'systemMenu', name: 'SystemMenu', component: () => import('@/views/system/SystemMenu.vue')},
