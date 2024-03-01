@@ -33,7 +33,7 @@ swiming-vue
 │    └─ index.html  网页
 ├─ src  源代码文件夹
 │    ├─ assets  资源文件夹
-│    │    ├─ globals.css  全局样式文件
+│    │    ├─ global.css  全局样式文件
 │    │    └─ logo.png  logo图片
 │    ├─ components  组件文件夹
 │    │    └─ mouseMove.vue  鼠标组件
