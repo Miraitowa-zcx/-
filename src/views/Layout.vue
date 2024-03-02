@@ -71,6 +71,14 @@
             <el-menu-item index="/roleManage">角色管理</el-menu-item>
           </el-submenu>
 
+          <el-submenu index="images">
+            <template slot="title">
+              <i class="el-icon-picture-outline"></i>
+              <span>图库</span>
+            </template>
+            <el-menu-item index="/imagesList">图像列表</el-menu-item>
+          </el-submenu>
+
           <el-submenu index="system">
             <template slot="title">
               <i class="el-icon-s-tools"></i>
