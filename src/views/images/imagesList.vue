@@ -1,4 +1,4 @@
-<template>>
+<template>
   <div class="grid-container">
     <div v-for="item in gridItems" :key="item.id" class="grid-item">
       {{ item.content }}
@@ -57,7 +57,6 @@ export default {
         {id: 7, content: 'Item 7'},
         {id: 8, content: 'Item 8'},
         {id: 9, content: 'Item 9'},
-
         // 更多项目...
       ]
     }
