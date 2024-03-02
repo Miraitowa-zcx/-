@@ -41,7 +41,7 @@
               <i class="el-icon-video-camera"></i>
               <span>摄像头管理</span>
             </template>
-            <el-menu-item index="/deviceList">设备列表</el-menu-item>
+            <el-menu-item index="/deviceList">实时播放</el-menu-item>
           </el-submenu>
 
           <el-submenu index="device">
@@ -62,15 +62,6 @@
             <el-menu-item index="/addEventInfo">事件添加</el-menu-item>
           </el-submenu>
 
-          <el-submenu index="system">
-            <template slot="title">
-              <i class="el-icon-s-tools"></i>
-              <span>系统管理</span>
-            </template>
-            <el-menu-item index="/systemMenu">系统菜单</el-menu-item>
-            <el-menu-item index="/systemDictionary">系统字典</el-menu-item>
-          </el-submenu>
-
           <el-submenu index="user">
             <template slot="title">
               <i class="el-icon-user"></i>
@@ -78,6 +69,15 @@
             </template>
             <el-menu-item index="/userManage">用户管理</el-menu-item>
             <el-menu-item index="/roleManage">角色管理</el-menu-item>
+          </el-submenu>
+
+          <el-submenu index="system">
+            <template slot="title">
+              <i class="el-icon-s-tools"></i>
+              <span>系统管理</span>
+            </template>
+            <el-menu-item index="/systemMenu">系统菜单</el-menu-item>
+            <el-menu-item index="/systemDictionary">系统字典</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>

@@ -5,17 +5,20 @@
     <div style="margin-bottom: 30px">新增事件信息</div>
 
     <!-- 表单 -->
-    <el-form :inline="true" :model="form" :rules="rules" ref="ruleForm" label-width="200px">
-      <el-form-item label="事件ID" prop="eventid">
-        <el-input v-model="form.eventid" placeholder="请输入事件ID"></el-input>
-      </el-form-item>
-      <el-form-item label="事件类型" prop="eventtype">
-        <el-input v-model="form.eventtype" placeholder="请输入事件类型"></el-input>
-      </el-form-item>
-      <el-form-item label="描述" prop="description">
-        <el-input v-model="form.description" placeholder="请输入描述"></el-input>
-      </el-form-item>
-    </el-form>
+    <div style="text-align: center">
+      <el-form :inline="true" :model="form" :rules="rules" ref="ruleForm" label-width="200px">
+        <el-form-item label="事件ID" prop="eventid">
+          <el-select v-model="form.eventid" placeholder="请输入事件ID"></el-select>
+        </el-form-item>
+        <el-form-item label="事件类型" prop="eventtype">
+          <el-input v-model="form.eventtype" placeholder="请输入事件类型"></el-input>
+        </el-form-item>
+        <el-form-item label="描述" prop="description">
+          <el-input id="input-textarea" maxlength="100" show-word-limit autosize type="textarea" :rows="2" v-model="form.description"
+                    placeholder="请输入描述"></el-input>
+        </el-form-item>
+      </el-form>
+    </div>
 
     <!-- 提交按钮 -->
     <div style="text-align: center; margin-top: 30px">
@@ -78,3 +81,9 @@ export default {
   }
 }
 </script>
+
+<style>
+#input-textarea {
+  width: 610px;
+}
+</style>

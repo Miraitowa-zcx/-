@@ -28,9 +28,9 @@
         </el-col>
         <el-col :span="6">
           <div>
-            <el-statistic title="男女比">
+            <el-statistic title="值">
               <template slot="formatter">
-                456/2
+                值
               </template>
             </el-statistic>
           </div>
@@ -55,7 +55,7 @@
         </el-col>
         <el-col :span="6">
           <div>
-            <el-statistic :value="like ? 521 : 520" title="Feedback">
+            <el-statistic :value="like ? 521 : 520" title="值">
               <template slot="suffix">
               <span @click="like = !like" class="like">
                 <i
@@ -132,7 +132,7 @@ export default {
       like: true,
       value1: 4154.564,
       value2: 1314,
-      title: "增长人数",
+      title: "值",
       return: [],
       borrow: [],
       admin: Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : {},

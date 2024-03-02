@@ -1,22 +1,25 @@
 <template>
-  <div>
+  <div style="width: 100%; padding-right: 10px; padding-left: 10px;">
 
-    <div>
-      <el-form>
-        <el-form-item label="文件地址(rtsp地址)">
-          <el-input v-model="path" placeholder="请输入rtsp地址" style="width: 300px"/>
-          <el-button style="margin-left: 10px" type="primary" @click="changePath">提交</el-button>
-        </el-form-item>
+    <!--  标题  -->
+    <div style="margin-bottom: 30px;">实时播放</div>
 
-
-      </el-form>
+    <!--  视频  -->
+    <div style="text-align: center; background: black">
+      <video id="videoElement" controls autoplay style="min-width: 70vh; min-height: 70vh;"/>
     </div>
 
-    <div>
-      <video id="videoElement" controls autoplay width="1024" height="576"></video>
-    </div>
-
-
+    <!-- 表单 -->
+    <el-form :inline="true" :model="form" :rules="rules" ref="ruleForm" label-width="200px"
+             style="margin-top:30px; text-align: center;">
+      <el-form-item label="文件地址(rtsp地址)" prop="path">
+        <el-input v-model="form.path" placeholder="请输入rtsp地址" style="width: 300px;">
+          <template slot="prepend">rtsp://</template>
+        </el-input>
+        <el-button style="margin-left: 10px" type="primary" @click="changePath">提交</el-button>
+        <el-button style="margin-left: 10px" type="warning" @click="resetVideo">重置</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
@@ -28,69 +31,107 @@ export default {
   name: 'deviceList',
   data() {
     return {
-      path: null,
-    };
+      isFlvPlayer: false,
+      videoElement: null,
+      form: {},
+      rules: {
+        path: [
+          {required: true, message: '请输入rtsp地址', trigger: 'blur'},
+          {min: 1, max: 10, message: '长度在 1 到 10 个字符'}
+        ]
+      }
+    }
+  },
+  mounted() {
+    this.videoElement = document.getElementById('videoElement');
+  },
+  computed: {
+    prefixedPath() {
+      return this.form.path.startsWith('rtsp://') ? this.form.path : 'rtsp://' + this.form.path;
+    }
   },
   methods: {
+    initFlvPlayer(url) {
+      const flvPlayer = FlvJs.createPlayer({
+        type: 'flv',
+        isLive: true,
+        cors: true,
+        url,
+      })
+
+      flvPlayer.attachMediaElement(this.videoElement)
+      flvPlayer.load()
+      // flvPlayer.play()
+
+      return flvPlayer
+    },
     resetUrl(url) {
       if (FlvJs.isSupported()) {
-        console.error("url:" + url);
-        const flvPlayer = FlvJs.createPlayer({
-          type: 'flv',
-          isLive: true,
-          cors: true,
-          url,
-        });
-        const videoElement = document.getElementById('videoElement');
-        console.log(videoElement);
-        flvPlayer.attachMediaElement(videoElement);
-        flvPlayer.load();
-        flvPlayer.play();
-        this.flv_start();
+        this.initFlvPlayer(url)
+        if (this.isFlvPlayer) {
+          this.flv_start()
+        }
       } else {
-        alert("不支持");
+        this.$notify.error('不支持flv播放')
       }
     },
     flv_start() {
-      const videoElement = document.getElementById('videoElement');
-      videoElement.play();
+      const videoElement = this.videoElement
+      if (videoElement.paused) {
+        videoElement.play();
+      }
     },
     flv_pause() {
-      const videoElement = document.getElementById('videoElement');
-      videoElement.pause();
+      const videoElement = this.videoElement
+      if (!videoElement.paused) {
+        videoElement.pause();
+      }
     },
     flv_destroy() {
-      let videoElement = document.getElementById('videoElement');
+      let videoElement = this.videoElement
       videoElement.pause();
-      videoElement.unload();
-      videoElement.detachMediaElement();
-      videoElement.destroy();
-      videoElement = null;
+      videoElement.removeAttribute('src')
+      videoElement.load();
+      videoElement = null
+      this.isFlvPlayer = true
     },
     flv_seekto() {
-      const videoElement = document.getElementById('videoElement');
+      const videoElement = this.videoElement
       videoElement.currentTime = parseFloat(document.getElementsByName('seekpoint')[0].value);
     },
-    changePath() {
-      if (this.path === null || this.path === "") {
-        alert("请输入地址");
-        return;
-      }
-      console.log(this.path);
-      axios.post(
-          "http://localhost:8080/putVideo",
-          {path: this.path}
-      ).then((result) => {
-        console.log(result.data);
-        if (result.data.code === 1) {
-          this.resetUrl("http://localhost:8080/getVideo?id=" + result.data.data);
-        } else {
-          alert("请求出错");
-        }
-      });
+    async changePath() {
+      this.$refs['ruleForm'].validate(async (valid) => {
+            if (valid) {
+              try {
+                const res = await axios.post('http://localhost:8080/putVideo', {path: this.prefixedPath})
+                if (res.data.code === 1) {
+                  this.$notify.success('连接成功');
+                  this.resetUrl("http://localhost:8080/getVideo?id=" + res.data.data);
+                } else {
+                  this.$notify.error(res.data.msg);
+                }
+              } catch (e) {
+                this.$notify.error('连接失败');
+              }
+            } else {
+              this.$notify.error('请完善信息');
+            }
+          }
+      )
     },
-  },
-};
+    resetVideo() {
+      this.isFlvPlayer = false
+      this.form.path = ''
+      this.flv_destroy()
+      this.$notify.success('重置成功')
+      setTimeout(() => {
+            this.$router.go(0)
+          }, 500
+      )
+
+    }
+  }
+}
 </script>
 
 <style scoped>

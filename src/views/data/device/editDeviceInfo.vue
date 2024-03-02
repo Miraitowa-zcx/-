@@ -5,26 +5,28 @@
     <div style="margin-bottom: 30px">编辑设备信息</div>
 
     <!-- 表单 -->
-    <el-form :inline="true" :model="form" :rules="rules" ref="ruleForm" label-width="200px">
-      <el-form-item label="设备名称" prop="devicename">
-        <el-input v-model="form.devicename" placeholder="请输入设备名称"></el-input>
-      </el-form-item>
-      <el-form-item label="设备类型" prop="devicetype">
-        <el-input v-model="form.devicetype" placeholder="请输入设备类型"></el-input>
-      </el-form-item>
-      <el-form-item label="位置" prop="location">
-        <el-input v-model="form.location" placeholder="请输入位置"></el-input>
-      </el-form-item>
-      <el-form-item label="Rtsp地址" prop="rtspurl">
-        <el-input v-model="form.rtspurl" placeholder="请输入Rtsp地址"></el-input>
-      </el-form-item>
-      <el-form-item label="设备用户名" prop="deviceusername">
-        <el-input v-model="form.deviceusername" placeholder="请输入设备用户名"></el-input>
-      </el-form-item>
-      <el-form-item label="设备密码" prop="devicepassword">
-        <el-input v-model="form.devicepassword" placeholder="请输入设备密码"></el-input>
-      </el-form-item>
-    </el-form>
+    <div style="text-align: center">
+      <el-form :inline="true" :model="form" :rules="rules" ref="ruleForm" label-width="200px">
+        <el-form-item label="设备名称" prop="devicename">
+          <el-input v-model="form.devicename" placeholder="请输入设备名称"></el-input>
+        </el-form-item>
+        <el-form-item label="设备类型" prop="devicetype">
+          <el-input v-model="form.devicetype" placeholder="请输入设备类型"></el-input>
+        </el-form-item>
+        <el-form-item label="位置" prop="location">
+          <el-input v-model="form.location" placeholder="请输入位置"></el-input>
+        </el-form-item>
+        <el-form-item label="Rtsp地址" prop="rtspurl">
+          <el-input v-model="form.rtspurl" placeholder="请输入Rtsp地址"></el-input>
+        </el-form-item>
+        <el-form-item label="设备用户名" prop="deviceusername">
+          <el-input v-model="form.deviceusername" placeholder="请输入设备用户名"></el-input>
+        </el-form-item>
+        <el-form-item label="设备密码" prop="devicepassword">
+          <el-input v-model="form.devicepassword" placeholder="请输入设备密码"></el-input>
+        </el-form-item>
+      </el-form>
+    </div>
 
 
     <!-- 提交按钮 -->

@@ -5,20 +5,22 @@
     <div style="margin-bottom: 30px">编辑事件信息</div>
 
     <!-- 表单 -->
-    <el-form :inline="true" :model="form" :rules="rules" ref="ruleForm" label-width="200px">
-      <el-form-item label="编号" prop="id">
-        <el-input v-model="form.id" disabled></el-input>
-      </el-form-item>
-      <el-form-item label="事件ID" prop="eventid">
-        <el-input v-model="form.eventid" placeholder="请输入事件ID"></el-input>
-      </el-form-item>
-      <el-form-item label="事件类型" prop="eventtype">
-        <el-input v-model="form.eventtype" placeholder="请输入事件类型"></el-input>
-      </el-form-item>
-      <el-form-item label="描述" prop="description">
-        <el-input v-model="form.description" placeholder="请输入描述"></el-input>
-      </el-form-item>
-    </el-form>
+    <div style="text-align: center">
+      <el-form :inline="true" :model="form" :rules="rules" ref="ruleForm" label-width="200px">
+        <el-form-item label="编号" prop="id">
+          <el-input v-model="form.id" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="事件ID" prop="eventid">
+          <el-input v-model="form.eventid" placeholder="请输入事件ID"></el-input>
+        </el-form-item>
+        <el-form-item label="事件类型" prop="eventtype">
+          <el-input v-model="form.eventtype" placeholder="请输入事件类型"></el-input>
+        </el-form-item>
+        <el-form-item label="描述" prop="description">
+          <el-input v-model="form.description" placeholder="请输入描述"></el-input>
+        </el-form-item>
+      </el-form>
+    </div>
 
     <!-- 提交按钮 -->
     <div style="text-align: center; margin-top: 30px">

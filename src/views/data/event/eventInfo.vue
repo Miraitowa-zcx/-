@@ -9,14 +9,14 @@
 
     <!-- 数据表格 -->
     <el-table :data="tableData" border stripe>
-      <el-table-column prop="id" label="编号" width="80"></el-table-column>
-      <el-table-column prop="eventid" label="事件ID"></el-table-column>
-      <el-table-column prop="eventtype" label="事件类型"></el-table-column>
-      <el-table-column prop="description" label="描述"></el-table-column>
-      <el-table-column prop="createtime" label="创建时间"></el-table-column>
-      <el-table-column prop="updatetime" label="更新时间"></el-table-column>
+      <el-table-column align="center" prop="id" label="编号" width="80"></el-table-column>
+      <el-table-column align="center" prop="eventid" label="事件ID"></el-table-column>
+      <el-table-column align="center" prop="eventtype" label="事件类型"></el-table-column>
+      <el-table-column align="center" prop="description" label="描述"></el-table-column>
+      <el-table-column align="center" prop="createtime" label="创建时间"></el-table-column>
+      <el-table-column align="center" prop="updatetime" label="更新时间"></el-table-column>
 
-      <el-table-column label="操作" width="200">
+      <el-table-column align="center" label="操作" width="200">
         <template slot-scope="scope">
           <el-button type="primary" icon="el-icon-edit" @click="$router.push('/editEventInfo?id=' + scope.row.id)">编辑
           </el-button>

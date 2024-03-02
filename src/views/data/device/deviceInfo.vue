@@ -8,28 +8,30 @@
     </div>
 
     <!-- 数据表格 -->
-    <el-table :data="tableData" border stripe>
-      <el-table-column prop="id" label="编号" width="80"></el-table-column>
-      <el-table-column prop="devicename" label="设备名称"></el-table-column>
-      <el-table-column prop="devicetype" label="设备类型"></el-table-column>
-      <el-table-column prop="location" label="位置"></el-table-column>
-      <el-table-column prop="rtspurl" label="Rtsp地址"></el-table-column>
-      <el-table-column prop="deviceusername" label="设备用户名"></el-table-column>
-      <el-table-column prop="devicepassword" label="设备密码"></el-table-column>
+    <div style="text-align: center">
+      <el-table :data="tableData" border stripe>
+        <el-table-column align="center" prop="id" label="编号" width="80"></el-table-column>
+        <el-table-column align="center" prop="devicename" label="设备名称"></el-table-column>
+        <el-table-column align="center" prop="devicetype" label="设备类型"></el-table-column>
+        <el-table-column align="center" prop="location" label="位置"></el-table-column>
+        <el-table-column align="center" prop="rtspurl" label="Rtsp地址"></el-table-column>
+        <el-table-column align="center" prop="deviceusername" label="设备用户名"></el-table-column>
+        <el-table-column align="center" prop="devicepassword" label="设备密码"></el-table-column>
 
-      <el-table-column label="操作" width="200">
-        <template slot-scope="scope">
-          <el-button type="primary" icon="el-icon-edit" @click="$router.push('/editDeviceInfo?id=' + scope.row.id)">编辑
-          </el-button>
-          <el-popconfirm
-              style="margin-left: 5px;"
-              title="您确定要删除这行数据吗？"
-              @confirm="del(scope.row.id)">
-            <el-button type="danger" icon="el-icon-delete" slot="reference">删除</el-button>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
-    </el-table>
+        <el-table-column align="center" label="操作" width="200">
+          <template slot-scope="scope">
+            <el-button type="primary" icon="el-icon-edit" @click="$router.push('/editDeviceInfo?id=' + scope.row.id)">编辑
+            </el-button>
+            <el-popconfirm
+                style="margin-left: 5px;"
+                title="您确定要删除这行数据吗？"
+                @confirm="del(scope.row.id)">
+              <el-button type="danger" icon="el-icon-delete" slot="reference">删除</el-button>
+            </el-popconfirm>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
 
     <!-- 分页 -->
     <div style="margin-top: 20px; text-align: center;">
