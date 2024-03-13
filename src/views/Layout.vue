@@ -112,41 +112,6 @@
         </el-footer>
       </el-container>
     </el-container>
-
-    <!--    &lt;!&ndash; 头部区域 &ndash;&gt;-->
-    <!--    <div style="height: 60px; line-height: 60px; background-color: white; margin-bottom: 2px; display: flex;">-->
-    <!--      <div style="flex: 1; text-align: right; padding-right: 20px">-->
-    <!--        <el-dropdown size="medium">-->
-    <!--          <span class="el-dropdown-link" style="cursor: pointer">-->
-    <!--            {{ admin.username }}-->
-    <!--            <i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-    <!--          </span>-->
-    <!--          <el-dropdown-menu slot="dropdown" style="margin-top: -10px">-->
-    <!--            <el-dropdown-item>-->
-    <!--              <div style="width: 50px; text-align: center;" @click="logout">-->
-    <!--                退出-->
-    <!--              </div>-->
-    <!--            </el-dropdown-item>-->
-    <!--          </el-dropdown-menu>-->
-    <!--        </el-dropdown>-->
-    <!--      </div>-->
-    <!--    </div>-->
-
-    <!--    &lt;!&ndash; 侧边栏和主体 &ndash;&gt;-->
-    <!--    <div style="display: flex; z-index: 1">-->
-
-    <!--      &lt;!&ndash; 侧边栏导航 &ndash;&gt;-->
-    <!--      <div-->
-    <!--          style="width: 200px; min-height: calc(100vh - 62px); overflow: hidden; margin-right: 2px; background-color: #545c64;">-->
-    <!--        <div style="width: 300px; height: 60px; background-color: #545c64">-->
-    <!--          <img src="@/assets/logo.png" alt="" style="width: 40px; position: relative; top: 10px; left: 10px;">-->
-    <!--          <span style="margin-left: 15px; font-size: 20px; color: white">溺水检测系统</span>-->
-
-    <!--      &lt;!&ndash; 主体数据 &ndash;&gt;-->
-    <!--      <div style="flex: 1; width: 0; background-color: white; padding: 10px;">-->
-    <!--        <router-view/>-->
-    <!--      </div>-->
-    <!--    </div>-->
     <mouseMove></mouseMove>
   </div>
 </template>
