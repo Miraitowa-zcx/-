@@ -8,7 +8,7 @@
     </div>
 
     <!-- 数据表格 -->
-    <div style="text-align: center">
+    <div style="min-height: calc(100vh - 300px); text-align: center">
       <el-table :data="tableData" border stripe>
         <el-table-column align="center" prop="id" label="编号" width="80"></el-table-column>
         <el-table-column align="center" prop="devicename" label="设备名称"></el-table-column>

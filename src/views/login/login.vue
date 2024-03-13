@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100vh; overflow: hidden; position: relative;" class="background">
-    <el-card class="" v-if="loginAdmin.id">
+    <el-card v-if="loginAdmin.id">
       <slide-verify :l="42"
                     :r="10"
                     :w="310"
@@ -13,7 +13,7 @@
       <div>{{ msg }}</div>
     </el-card>
     <el-row :style="{opacity: 0.8}">
-      <div style="width: 500px; height: 400px; background-color: white; border-radius: 10px;
+      <div style="width: 500px; height: 380px; background-color: white; border-radius: 10px;
             margin: 250px auto; padding: 50px;">
         <div style="margin: 30px; text-align: center; font-size: 30px; font-weight: bold; color: dodgerblue;">登 录
         </div>
@@ -43,7 +43,7 @@ import request from "@/utils/request";
 import Cookies from "js-cookie";
 
 export default {
-  name: 'Login',
+  name: 'LoginPage',
   data() {
     return {
       loginAdmin: {},

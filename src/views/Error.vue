@@ -5,3 +5,8 @@
     <div><el-button style="margin-top: 20px; font-size: 20px" type="text" @click="$router.push('/')">返回主页</el-button></div>
   </div>
 </template>
+<script>
+export default {
+  name: 'ErrorPage',
+}
+</script>

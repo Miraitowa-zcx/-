@@ -1,21 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from '../views/Layout.vue'
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 Vue.use(VueRouter)
 
 const routes = [
 
     //  ===   登录   ===
-    {path: '/login', name: 'Login', component: () => import('@/views/login/login.vue')},
+    {path: '/login', name: 'LoginPage', component: () => import('@/views/login/login.vue')},
 
     //  ===   注册   ===
-    {path: '/register', name: 'Register', component: () => import('@/views/register/register.vue')},
+    {path: '/register', name: 'RegisterPage', component: () => import('@/views/register/register.vue')},
 
     //  ===   一级路由   ===
     {
-        path: '/', name: 'Layout', component: Layout, redirect: '/home',
+        path: '/', name: 'LayoutPage', component: Layout, redirect: '/home',
 
         // 二级路由
         children: [
@@ -46,11 +46,9 @@ const routes = [
             //  ===   系统管理  ===
             {path: 'systemMenu', name: 'SystemMenu', component: () => import('@/views/system/systemMenu.vue')},
             {path: 'systemDictionary', name: 'SystemDictionary', component: () => import('@/views/system/systemDictionary.vue')}
-
-
         ]
     },
-    {path: "*", component: () => import('@/views/404.vue')}
+    {path: "*", component: () => import('@/views/Error.vue')}
 ]
 
 const router = new VueRouter({mode: 'history', base: process.env.BASE_URL, routes})
