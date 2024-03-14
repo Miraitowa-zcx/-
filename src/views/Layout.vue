@@ -6,7 +6,8 @@
           <img src="@/assets/logo.png" alt="" style="width: 40px; position: relative; top: 10px; left: 10px;">
           <span style="margin-left: 15px; font-size: 20px; color: white">溺水检测系统</span>
           <el-divider></el-divider>
-          <el-menu :default-active="$route.path" router class="el-menu-demo"
+          <el-menu :default-active="$route.path" router
+                   class="el-menu-demo"
                    @open="handleOpen"
                    @close="handleClose"
                    background-color="#545c64"
@@ -26,7 +27,7 @@
               <el-menu-item index="/deviceList">实时播放</el-menu-item>
             </el-submenu>
 
-            <el-submenu index="device">
+            <el-submenu v-if="role === 'admin'" index="device">
               <template slot="title">
                 <i class="el-icon-info"></i>
                 <span>设备数据</span>
@@ -35,7 +36,7 @@
               <el-menu-item index="/addDeviceInfo">设备添加</el-menu-item>
             </el-submenu>
 
-            <el-submenu index="event">
+            <el-submenu v-if="role === 'admin'" index="event">
               <template slot="title">
                 <i class="el-icon-s-claim"></i>
                 <span>事件数据</span>
@@ -44,7 +45,7 @@
               <el-menu-item index="/addEventInfo">事件添加</el-menu-item>
             </el-submenu>
 
-            <el-submenu index="user">
+            <el-submenu v-if="role === 'admin'" index="user">
               <template slot="title">
                 <i class="el-icon-user"></i>
                 <span>用户管理</span>
@@ -53,7 +54,7 @@
               <el-menu-item index="/roleManage">角色管理</el-menu-item>
             </el-submenu>
 
-            <el-submenu index="images">
+            <el-submenu v-if="role === 'admin'" index="images">
               <template slot="title">
                 <i class="el-icon-picture-outline"></i>
                 <span>图库</span>
@@ -61,7 +62,7 @@
               <el-menu-item index="/imagesList">图像列表</el-menu-item>
             </el-submenu>
 
-            <el-submenu index="system">
+            <el-submenu v-if="role === 'admin'" index="system">
               <template slot="title">
                 <i class="el-icon-s-tools"></i>
                 <span>系统管理</span>
@@ -124,7 +125,8 @@ export default {
   name: 'LayoutPage',
   data() {
     return {
-      admin: Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : {}
+      admin: Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : {},
+      role: Cookies.get('role') ? JSON.parse(Cookies.get('role')) : {}
     }
   },
   methods: {
@@ -133,11 +135,16 @@ export default {
       // 清除浏览器用户数据
       setTimeout(() => {
         Cookies.remove('admin')
+        Cookies.remove('role')
         this.$router.push('/login')
       }, 1000)
     },
     goBack() {
-      this.$router.push('/')
+      if (this.$route.path === '/') {
+        this.$notify.error('已回到首页')
+      } else {
+        this.$router.push('/')
+      }
     }
   },
   components: {

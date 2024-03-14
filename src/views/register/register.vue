@@ -131,7 +131,7 @@ export default {
               this.$notify.error(res.msg)
             } else {
               request.post('/Diners/register', this.account).then(res => {
-                if (res.code === 200) {
+                if (res.code === 1) {
                   this.registerAdmin = res.data
                 } else {
                   this.$notify.error(res.msg)

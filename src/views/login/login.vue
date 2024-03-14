@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100vh; overflow: hidden; position: relative;" class="background">
-    <el-card v-if="loginAdmin.id">
+    <el-card class="cover"  v-if="loginCookie.id">
       <slide-verify :l="42"
                     :r="10"
                     :w="310"
@@ -46,7 +46,7 @@ export default {
   name: 'LoginPage',
   data() {
     return {
-      loginAdmin: {},
+      loginCookie: {},
       admin: {},
       rules: {
         username: [
@@ -64,9 +64,15 @@ export default {
     login() {
       this.$refs['loginForm'].validate((valid) => {
         if (valid) {
-          request.post('/admin/login', this.admin).then(res => {
-            if (res.code === '200') {
-              this.loginAdmin = res.data
+          request.post('/Diners/login', this.admin).then(res => {
+            if (res.code === 1) {
+              // this.loginCookie = res.data
+              this.loginCookie = {
+                id: "123",
+                role: "admin",
+                username: "admin",
+                token: "132456789789"
+              }
             } else {
               this.$notify.error(res.msg)
             }
@@ -79,7 +85,8 @@ export default {
     onSuccess() {
       this.$notify.success("登陆成功")
       setTimeout(() => {
-        Cookies.set('admin', JSON.stringify(this.loginAdmin))
+        Cookies.set('admin', JSON.stringify(this.loginCookie))
+        Cookies.set('role', JSON.stringify(this.loginCookie.role))
         this.$router.push('/')
       }, 1000)
     },
@@ -98,7 +105,7 @@ export default {
   width: fit-content;
   background-color: white;
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;

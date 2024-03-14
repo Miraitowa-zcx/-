@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from '../views/Layout.vue'
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
+import dynamicRoutes from './dynamic-routes' // 引入动态路由配置
 
 Vue.use(VueRouter)
 
@@ -13,11 +14,9 @@ const routes = [
     //  ===   注册   ===
     {path: '/register', name: 'RegisterPage', component: () => import('@/views/register/register.vue')},
 
-    //  ===   一级路由   ===
+    // 一级路由
     {
         path: '/', name: 'LayoutPage', component: Layout, redirect: '/home',
-
-        // 二级路由
         children: [
 
             //  ===   主页   ===
@@ -26,48 +25,41 @@ const routes = [
             // ====   摄像头管理   ====
             {path: 'deviceList', name: 'DeviceList', component: () => import('@/views/camera/deviceList.vue')},
 
-            //  ===   设备数据   ====
-            {path: 'deviceInfo', name: 'DeviceInfo', component: () => import('@/views/data/device/deviceInfo.vue')},
-            {path: 'editDeviceInfo', name: 'EditDeviceInfo', component: () => import('@/views/data/device/editDeviceInfo.vue')},
-            {path: 'addDeviceInfo', name: 'AddDeviceInfo', component: () => import('@/views/data/device/addDeviceInfo.vue')},
-
-            //  ===   事件数据   ===
-            {path: 'eventInfo', name: 'EventInfo', component: () => import('@/views/data/event/eventInfo.vue')},
-            {path: 'editEventInfo', name: 'EditEventInfo', component: () => import('@/views/data/event/editEventInfo.vue')},
-            {path: 'addEventInfo', name: 'AddEventInfo', component: () => import('@/views/data/event/addEventInfo.vue')},
-
-            //  ===   用户管理  ===
-            {path: 'userManage', name: 'UserManage', component: () => import('@/views/user/userManage.vue')},
-            {path: 'roleManage', name: 'RoleManage', component: () => import('@/views/user/roleManage.vue')},
-
-            // ===   图像管理  ===
-            {path: 'imagesList', name: 'ImagesList', component: () => import('@/views/images/imagesList.vue')},
-
-            //  ===   系统管理  ===
-            {path: 'systemMenu', name: 'SystemMenu', component: () => import('@/views/system/systemMenu.vue')},
-            {path: 'systemDictionary', name: 'SystemDictionary', component: () => import('@/views/system/systemDictionary.vue')}
+            // 动态加载路由
+            ...dynamicRoutes
         ]
     },
     {path: "*", component: () => import('@/views/Error.vue')}
 ]
 
 const router = new VueRouter({mode: 'history', base: process.env.BASE_URL, routes})
+router.beforeEach((to, from, next) => {
 
-// router.beforeEach((to, from, next) => {
-//   if (to.path === '/login') {
-//     next()
-//   }
-//   const admin = Cookies.get("admin")
-//   if (!admin && to.path !== '/login' && to.path !== '/register') {
-//     return next('/login')
-//   }
-//   next()
-// })
+    const cookie = Cookies.get("admin") ? JSON.parse(Cookies.get("admin")) : null
+    if (!cookie && to.path !== '/login' && to.path !== '/register') {
+        return next('/login');
+    }
+
+    // 如果用户是管理员，则无需特殊处理，直接进入下一个路由
+    const userRole = Cookies.get('role') ? JSON.parse(Cookies.get('role')) : null
+    if (userRole === 'admin') {
+        return next();
+    }
+
+    // 对于非管理员用户
+    // 允许他们访问登录、注册页面以及一级路由下除动态路由之外的所有子路由
+    if (to.path === '/login' || to.path === '/register' ||
+        (to.path !== '/' && !dynamicRoutes.some(route => route.path.startsWith(to.path.split('/')[1])))) {
+        return next();
+    }
+
+    // 若非管理员用户尝试访问不在允许范围内的动态路由，则重定向至登录页面
+    return next('/Error');
+})
 
 // 针对ElementUI导航栏中重复导航报错问题
-// const originalPush = VueRouter.prototype.push
-// VueRouter.prototype.push = function push(location) {
-//   return originalPush.call(this, location).catch(err => err)
-// }
-
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err)
+}
 export default router
