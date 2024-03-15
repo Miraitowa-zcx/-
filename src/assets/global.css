@@ -14,7 +14,7 @@ th {
 
 .background {
     position: absolute;
-    background-image: url("@/assets/image.webp");
+    background-image: url("@/assets/images/image.webp");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;

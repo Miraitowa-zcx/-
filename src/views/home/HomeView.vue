@@ -1,149 +1,57 @@
 <template>
-  <div>
-    <div style="margin: 20px 0">
-      <el-select class="input" v-model="timeRange" placeholder="请选择" @change="load">
-        <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-        </el-option>
-      </el-select>
-    </div>
-    <el-card>
-      <div id="line" style="width: 100%; height: 400px;"></div>
-    </el-card>
-
-    <div style="margin: 20px 0">
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <div>
-            <el-statistic
-                group-separator=","
-                :precision="2"
-                :value="value2"
-                :title="title"
-            ></el-statistic>
+  <el-row style="padding-top: 20px; padding-left: 20px">
+    <el-col :span="8" v-for="(o, index) in 3" :key="o" :offset="index = 0">
+      <el-card shadow="hover" style="width: 500px; height: 150px; display: flex;" :body-style="{ padding: '0px' }">
+        <div style="display: flex;">
+          <el-card class="card-container-left" shadow="never">
+            <img src="@/assets/images/index_msg.png" alt="图片" class="avatar">
+          </el-card>
+          <div class="card-container-right">
+            <el-card style="height: 100%;" shadow="never">
+              <div slot="header">
+                <span>名称</span>
+              </div>
+              <div v-for="o in 4" :key="o" class="text item">
+                {{ '列表内容 ' + o }}
+              </div>
+            </el-card>
           </div>
-        </el-col>
-        <el-col :span="6">
-          <div>
-            <el-statistic title="值">
-              <template slot="formatter">
-                值
-              </template>
-            </el-statistic>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div>
-            <el-statistic
-                group-separator=","
-                :precision="2"
-                decimal-separator="."
-                :value="value1"
-                :title="title"
-            >
-              <template slot="prefix">
-                <i class="el-icon-s-flag" style="color: red"></i>
-              </template>
-              <template slot="suffix">
-                <i class="el-icon-s-flag" style="color: blue"></i>
-              </template>
-            </el-statistic>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div>
-            <el-statistic :value="like ? 521 : 520" title="值">
-              <template slot="suffix">
-              <span @click="like = !like" class="like">
-                <i
-                    class="el-icon-star-on"
-                    style="color:red"
-                    v-show="!!like"
-                ></i>
-                <i class="el-icon-star-off" v-show="!like"></i>
-              </span>
-              </template>
-            </el-statistic>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
-  </div>
+        </div>
+      </el-card>
+    </el-col>
+    <el-col :span="6" v-for="(o, index) in 4" :key="o" :offset="index = 0" style="padding-top: 50px">
+      <el-card shadow="hover" style="width: 350px; height: 300px; text-align: center;" :body-style="{ padding: '1' }">
+        <div slot="header">
+          <span>名称</span>
+        </div>
+        <div v-for="o in 4" :key="o" class="text item">
+          {{ '列表内容 ' + o }}
+        </div>
+      </el-card>
+    </el-col>
+    <el-col :span="6" v-for="(o, index) in 4" :key="o" :offset="index = 0" style="padding-top: 50px">
+      <el-card shadow="hover" style="width: 350px; height: 350px; text-align: center;" :body-style="{ padding: '1' }">
+        <div slot="header">
+          <span>名称</span>
+        </div>
+        <div v-for="o in 4" :key="o" class="text item">
+          {{ '列表内容 ' + o }}
+        </div>
+      </el-card>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
 import Cookies from "js-cookie";
-import request from "@/utils/request";
-import * as echarts from 'echarts';
-
-const option = {
-  title: {
-    text: '统计'
-  },
-  tooltip: {
-    trigger: 'axis'
-  },
-  legend: {
-    data: ['信息-1', '信息-2']
-  },
-  grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    containLabel: true
-  },
-  toolbox: {
-    feature: {
-      saveAsImage: {}
-    }
-  },
-  xAxis: {
-    type: 'category',
-    boundaryGap: false,
-    data: []
-  },
-  yAxis: {
-    type: 'value'
-  },
-  series: [
-    {
-      name: '信息-1',
-      type: 'line',
-      stack: 'Total',
-      smooth: true,
-      data: []
-    },
-    {
-      name: '信息-2',
-      type: 'line',
-      stack: 'Total',
-      smooth: true,
-      data: []
-    }
-  ]
-};
+// import request from "@/utils/request";
+//import * as echarts from 'echarts';
 
 export default {
   data() {
     return {
-      like: true,
-      value1: 4154.564,
-      value2: 1314,
-      title: "值",
-      return: [],
-      borrow: [],
       admin: Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : {},
-      lineBox: null,
-      timeRange: 'week',
-      options: [
-        {value: 'week', label: '最近一周'},
-        {value: 'month', label: '最近一个月'},
-        {value: 'month2', label: '最近两个月'},
-        {value: 'month3', label: '最近三个月'}
-      ]
+      homeCards: {}
     }
   },
   mounted() {
@@ -151,28 +59,47 @@ export default {
   },
   methods: {
     load() {
-      if (!this.lineBox) {
-        this.lineBox = echarts.init(document.getElementById('line'))
-      }
-      request.get('/charts/lineCharts/' + this.timeRange).then(res => {
-        option.xAxis.data = res.data.date
-        option.series[0].data = res.data.borrow
-        option.series[1].data = res.data.return
-        this.lineBox.setOption(option)
-      })
     }
   }
 }
 </script>
 
-<style>
-.input {
-  width: 300px;
+<style scoped>
+
+div {
+  user-select: none;
+  pointer-events: auto; /* 保持其他鼠标事件可用 */
 }
 
-.like {
-  cursor: pointer;
-  font-size: 25px;
-  display: inline-block;
+img {
+  pointer-events: none; /* 禁止图片上的鼠标事件，但此处并不影响拖动 */
+}
+
+.card-container-left {
+  padding-right: 70px;
+  width: 115px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  background-color: #333333;
+}
+
+.card-container-right {
+  width: calc(500px - 115px);
+  text-align: center;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  display: block;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.item {
+  margin-bottom: 18px;
 }
 </style>

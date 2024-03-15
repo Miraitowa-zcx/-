@@ -3,7 +3,7 @@
     <el-container style="height: 100vh; overflow: hidden;">
       <el-aside width="200px">
         <div>
-          <img src="@/assets/logo.png" alt="" style="width: 40px; position: relative; top: 10px; left: 10px;">
+          <img src="../assets/images/logo.png" alt="" style="width: 40px; position: relative; top: 10px; left: 10px;">
           <span style="margin-left: 15px; font-size: 20px; color: white">溺水检测系统</span>
           <el-divider></el-divider>
           <el-menu :default-active="$route.path" router
@@ -45,6 +45,14 @@
               <el-menu-item index="/addEventInfo">事件添加</el-menu-item>
             </el-submenu>
 
+            <el-submenu v-if="role === 'admin'" index="images">
+              <template slot="title">
+                <i class="el-icon-picture-outline"></i>
+                <span>图库</span>
+              </template>
+              <el-menu-item index="/imagesList">图像列表</el-menu-item>
+            </el-submenu>
+
             <el-submenu v-if="role === 'admin'" index="user">
               <template slot="title">
                 <i class="el-icon-user"></i>
@@ -52,14 +60,6 @@
               </template>
               <el-menu-item index="/userManage">用户管理</el-menu-item>
               <el-menu-item index="/roleManage">角色管理</el-menu-item>
-            </el-submenu>
-
-            <el-submenu v-if="role === 'admin'" index="images">
-              <template slot="title">
-                <i class="el-icon-picture-outline"></i>
-                <span>图库</span>
-              </template>
-              <el-menu-item index="/imagesList">图像列表</el-menu-item>
             </el-submenu>
 
             <el-submenu v-if="role === 'admin'" index="system">
