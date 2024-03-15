@@ -14,15 +14,15 @@
       <div>{{ msg }}</div>
     </el-card>
     <el-row :style="{opacity: 0.8}">
-      <div style="width: 500px; height: 500px; background-color: white; border-radius: 10px;
+      <div style="width: 500px; height: 550px; background-color: white; border-radius: 10px;
             margin: 250px auto; padding: 50px;">
         <div style="margin: 30px; text-align: center; font-size: 30px; font-weight: bold; color: dodgerblue;">
           注 册
         </div>
         <el-form :model="account" :rules="rules" ref="registerForm" label-width="80px">
-          <el-form-item prop="phone" label="手机号">
-            <el-input placeholder="请输入手机号" prefix-icon="el-icon-user" size="medium"
-                      v-model="account.phone"></el-input>
+          <el-form-item prop="username" label="用户名">
+            <el-input placeholder="请输入用户名" prefix-icon="el-icon-user" size="medium"
+                      v-model="account.username"></el-input>
           </el-form-item>
           <el-form-item prop="password" label="密码">
             <el-input placeholder="请输入密码" show-password prefix-icon="el-icon-lock" size="medium"
@@ -31,6 +31,10 @@
           <el-form-item prop="repeatPassword" label="确认密码">
             <el-input placeholder="请输入确认密码" show-password prefix-icon="el-icon-lock" size="medium"
                       v-model="account.repeatPassword" type="password"></el-input>
+          </el-form-item>
+          <el-form-item prop="phone" label="手机号">
+            <el-input placeholder="请输入手机号" prefix-icon="el-icon-user" size="medium"
+                      v-model="account.phone"></el-input>
           </el-form-item>
           <el-form-item prop="code" label="验证码">
             <el-row type="flex" justify="center" align="middle">
@@ -98,11 +102,14 @@ export default {
       }
     }
     return {
-      registerAdmin: {},
       isClick: 0,
       checkPass: {},
       account: {},
       rules: {
+        username: [
+          {required: true, message: '请输入用户名', trigger: 'blur'},
+          {min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur'}
+        ],
         phone: [
           {validator: checkPhone, required: true, trigger: 'blur'}
         ],
@@ -126,17 +133,12 @@ export default {
     register() {
       this.$refs['registerForm'].validate((valid) => {
         if (valid) {
-          request.get('/Diners/checkPhone?phone=' + this.account.phone).then(res => {
-            if (res.code === 1) {
-              this.$notify.error(res.msg)
+          request.post('/Diners/register', this.account).then(res => {
+            if (res.code === 200) {
+              this.$notify.success(res.msg)
+                this.$router.push('/login')
             } else {
-              request.post('/Diners/register', this.account).then(res => {
-                if (res.code === 1) {
-                  this.registerAdmin = res.data
-                } else {
-                  this.$notify.error(res.msg)
-                }
-              })
+              this.$notify.error(res.msg)
             }
           })
         } else {
@@ -172,7 +174,7 @@ export default {
       }
     },
     getCaptcha() {
-      request.get('/VerifyCode/send?phone=' + this.account.phone).then(res => {
+      request.get('/SendVerify/send?phone=' + this.account.phone).then(res => {
         if (res.code === 1) {
           setTimeout(() => {
                 this.$notify.success("发送成功")

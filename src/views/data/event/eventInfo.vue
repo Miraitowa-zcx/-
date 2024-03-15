@@ -8,27 +8,29 @@
     </div>
 
     <!-- 数据表格 -->
-    <el-table :data="tableData" border stripe>
-      <el-table-column align="center" prop="id" label="编号" width="80"></el-table-column>
-      <el-table-column align="center" prop="eventid" label="事件ID"></el-table-column>
-      <el-table-column align="center" prop="eventtype" label="事件类型"></el-table-column>
-      <el-table-column align="center" prop="description" label="描述"></el-table-column>
-      <el-table-column align="center" prop="createtime" label="创建时间"></el-table-column>
-      <el-table-column align="center" prop="updatetime" label="更新时间"></el-table-column>
+    <div style="min-height: calc(100vh - 300px); text-align: center">
+      <el-table :data="tableData" border stripe>
+        <el-table-column align="center" prop="id" label="编号" width="80"></el-table-column>
+        <el-table-column align="center" prop="eventid" label="事件ID"></el-table-column>
+        <el-table-column align="center" prop="eventtype" label="事件类型"></el-table-column>
+        <el-table-column align="center" prop="description" label="描述"></el-table-column>
+        <el-table-column align="center" prop="createtime" label="创建时间"></el-table-column>
+        <el-table-column align="center" prop="updatetime" label="更新时间"></el-table-column>
 
-      <el-table-column align="center" label="操作" width="200">
-        <template slot-scope="scope">
-          <el-button type="primary" icon="el-icon-edit" @click="$router.push('/editEventInfo?id=' + scope.row.id)">编辑
-          </el-button>
-          <el-popconfirm
-              style="margin-left: 5px;"
-              title="您确定要删除这行数据吗？"
-              @confirm="del(scope.row.id)">
-            <el-button type="danger" icon="el-icon-delete" slot="reference">删除</el-button>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
-    </el-table>
+        <el-table-column align="center" label="操作" width="200">
+          <template slot-scope="scope">
+            <el-button type="primary" icon="el-icon-edit" @click="$router.push('/editEventInfo?id=' + scope.row.id)">编辑
+            </el-button>
+            <el-popconfirm
+                style="margin-left: 5px;"
+                title="您确定要删除这行数据吗？"
+                @confirm="del(scope.row.id)">
+              <el-button type="danger" icon="el-icon-delete" slot="reference">删除</el-button>
+            </el-popconfirm>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
 
     <!-- 分页 -->
     <div style="margin-top: 20px; text-align: center;">

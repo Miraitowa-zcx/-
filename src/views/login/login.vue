@@ -65,13 +65,12 @@ export default {
       this.$refs['loginForm'].validate((valid) => {
         if (valid) {
           request.post('/Diners/login', this.admin).then(res => {
-            if (res.code === 1) {
-              // this.loginCookie = res.data
+            if (res.code === 200) {
               this.loginCookie = {
-                id: "123",
-                role: "admin",
-                username: "admin",
-                token: "132456789789"
+                id: res.id,
+                username: res.username,
+                role: res.role,
+                token: res.token
               }
             } else {
               this.$notify.error(res.msg)
