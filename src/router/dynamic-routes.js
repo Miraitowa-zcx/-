@@ -1,11 +1,7 @@
 export default [
 
-    // admin不可显示
-
     // ====   摄像头管理   ====
-    {
-        path: 'deviceInfo', name: 'DeviceInfo', component: () => import('@/views/data/device/deviceInfo.vue')
-    },
+    {path: 'deviceInfo', name: 'DeviceInfo', component: () => import('@/views/data/device/deviceInfo.vue')},
 
     //  ===   设备数据   ====
     {path: 'deviceInfo', name: 'DeviceInfo', component: () => import('@/views/data/device/deviceInfo.vue')},
@@ -27,5 +23,4 @@ export default [
     //  ===   系统管理  ===
     {path: 'systemMenu', name: 'SystemMenu', component: () => import('@/views/system/systemMenu.vue')},
     {path: 'systemDictionary', name: 'SystemDictionary', component: () => import('@/views/system/systemDictionary.vue')}
-    // ... 其他动态路由配置项
 ]

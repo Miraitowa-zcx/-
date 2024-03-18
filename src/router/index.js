@@ -53,7 +53,7 @@ router.beforeEach((to, from, next) => {
         return next();
     }
 
-    // 若非管理员用户尝试访问不在允许范围内的动态路由，则重定向至登录页面
+    // 若非管理员用户尝试访问不在允许范围内的动态路由，则重定向至ERROR页面
     return next('/Error');
 })
 

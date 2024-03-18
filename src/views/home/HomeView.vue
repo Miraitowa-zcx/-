@@ -1,7 +1,7 @@
 <template>
   <el-row style="padding-top: 20px; padding-left: 20px">
     <el-col :span="8" v-for="(o, index) in 3" :key="o" :offset="index = 0">
-      <el-card shadow="hover" style="width: 500px; height: 150px; display: flex;" :body-style="{ padding: '0px' }">
+      <el-card shadow="hover" style="max-width: 85%; height: 150px; display: flex;" :body-style="{ padding: '0px' }">
         <div style="display: flex;">
           <el-card class="card-container-left" shadow="never">
             <img src="@/assets/images/index_msg.png" alt="图片" class="avatar">
@@ -20,7 +20,8 @@
       </el-card>
     </el-col>
     <el-col :span="6" v-for="(o, index) in 4" :key="o" :offset="index = 0" style="padding-top: 50px">
-      <el-card shadow="hover" style="width: 350px; height: 300px; text-align: center;" :body-style="{ padding: '1' }">
+      <el-card shadow="hover" style="max-width: 350px; height: 300px; text-align: center;"
+               :body-style="{ padding: '1' }">
         <div slot="header">
           <span>名称</span>
         </div>
@@ -29,13 +30,16 @@
         </div>
       </el-card>
     </el-col>
-    <el-col :span="6" v-for="(o, index) in 4" :key="o" :offset="index = 0" style="padding-top: 50px">
-      <el-card shadow="hover" style="width: 350px; height: 350px; text-align: center;" :body-style="{ padding: '1' }">
+    <el-col :span="6" v-for="(city, index) in cities" :key="city.id" :offset="index === 0 ? 0 : null"
+            style="padding-top: 50px">
+      <el-card shadow="hover" style="max-width: 350px; height: 350px; text-align: center;"
+               :body-style="{ padding: '1' }">
         <div slot="header">
-          <span>名称</span>
+          <span>{{ city.name }}</span>
         </div>
-        <div v-for="o in 4" :key="o" class="text item">
-          {{ '列表内容 ' + o }}
+        <div class="text item">
+          <iframe scrolling="no" :src="'https://widget.tianqiapi.com/?style=yf&skin=pitaya&city=' + city.name" frameborder="0" width="320"
+                  height="320" allowtransparency="true"></iframe>
         </div>
       </el-card>
     </el-col>
@@ -50,6 +54,12 @@ import Cookies from "js-cookie";
 export default {
   data() {
     return {
+      cities: [
+        {id: '100010', name: '北京'},
+        {id: '100012', name: '上海'},
+        {id: '100013', name: '广州'},
+        {id: '100014', name: '深圳'},
+      ],
       admin: Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : {},
       homeCards: {}
     }

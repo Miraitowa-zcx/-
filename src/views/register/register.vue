@@ -133,9 +133,9 @@ export default {
     register() {
       this.$refs['registerForm'].validate((valid) => {
         if (valid) {
-          request.post('/Diners/register', this.account).then(res => {
-            if (res.code === 200) {
-              this.$notify.success(res.msg)
+          request.post('/user/register', this.account).then(res => {
+            if (res.code === '200') {
+              this.$notify.success("注册成功")
                 this.$router.push('/login')
             } else {
               this.$notify.error(res.msg)
@@ -174,8 +174,8 @@ export default {
       }
     },
     getCaptcha() {
-      request.get('/SendVerify/send?phone=' + this.account.phone).then(res => {
-        if (res.code === 1) {
+      request.get('/sendVerify/send?phone=' + this.account.phone).then(res => {
+        if (res.code === '200') {
           setTimeout(() => {
                 this.$notify.success("发送成功")
               }, 500

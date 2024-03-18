@@ -64,13 +64,13 @@ export default {
     login() {
       this.$refs['loginForm'].validate((valid) => {
         if (valid) {
-          request.post('/Diners/login', this.admin).then(res => {
-            if (res.code === 200) {
+          request.post('/user/login', this.admin).then(res => {
+            if (res.code === '200') {
               this.loginCookie = {
-                id: res.id,
-                username: res.username,
-                role: res.role,
-                token: res.token
+                id: res.data.id,
+                username: res.data.username,
+                role: res.data.role,
+                token: res.data.token
               }
             } else {
               this.$notify.error(res.msg)

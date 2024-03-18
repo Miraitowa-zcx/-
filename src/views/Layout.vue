@@ -98,7 +98,7 @@
           </div>
         </el-header>
         <el-main>
-          <div style="height: calc(100vh - 160px); background-color: white; padding: 10px;">
+          <div style="min-height: calc(100vh - 160px); background-color: white; padding: 10px;">
             <router-view/>
           </div>
         </el-main>

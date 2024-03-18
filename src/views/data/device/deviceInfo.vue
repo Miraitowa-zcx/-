@@ -73,10 +73,8 @@ export default {
       this.load()
     },
     load() {
-      request.get('/Devices/page', {
-        params: this.params
-      }).then(res => {
-        if (res.code === 1) {
+      request.get('/devices/page', {params: this.params}).then(res => {
+        if (res.code === '200') {
           this.tableData = res.data.records
           this.total = res.data.total
           console.log(this.tableData)
@@ -92,8 +90,8 @@ export default {
       this.load()
     },
     del(id) {
-      request.delete("/Devices/delete/" + id).then(res => {
-        if (res.code === 1) {
+      request.delete("/devices/delete/" + id).then(res => {
+        if (res.code === '200') {
           this.$notify.success('删除成功')
           this.load()
         } else {

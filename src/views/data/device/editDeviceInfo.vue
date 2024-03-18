@@ -28,7 +28,6 @@
       </el-form>
     </div>
 
-
     <!-- 提交按钮 -->
     <div style="text-align: center; margin-top: 30px">
       <el-button type="primary" @click="save" size="medium">提交</el-button>
@@ -75,7 +74,7 @@ export default {
   },
   created() {
     const id = this.$route.query.id
-    request.get("/Devices/" + id).then(res => {
+    request.get("/devices/" + id).then(res => {
       this.form = res.data
     })
   },
@@ -83,8 +82,8 @@ export default {
     save() {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
-          request.put('/Devices/update/' + this.form.id, this.form).then(res => {
-            if (res.code === 1) {
+          request.put('/devices/update/' + this.form.id, this.form).then(res => {
+            if (res.code === '200') {
               this.$notify.success('更新成功')
               this.$router.push("/deviceInfo")
             } else {

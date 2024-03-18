@@ -5,8 +5,8 @@
     <div style="margin-bottom: 30px;">实时播放</div>
 
     <!--  视频  -->
-    <div style="text-align: center; background: black">
-      <video id="videoElement" controls autoplay style="min-width: 70vh; min-height: 70vh;"/>
+    <div style="text-align: center; background: black; padding: 1px">
+      <video id="videoElement" controls autoplay style="min-width: 90%; min-height: 90%;"/>
     </div>
 
     <!-- 表单 -->
