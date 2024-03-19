@@ -66,7 +66,7 @@ export default {
   },
   created() {
     const id = this.$route.query.id
-    request.get("/Event/" + id).then(res => {
+    request.get("/event/" + id).then(res => {
       this.form = res.data
     })
   },
@@ -74,8 +74,8 @@ export default {
     save() {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
-          request.put('/Event/update/' + this.form.id, this.form).then(res => {
-            if (res.code === 1) {
+          request.put('/event/update/' + this.form.id, this.form).then(res => {
+            if (res.code === '200') {
               this.$notify.success('更新成功')
               this.$router.push("/eventInfo")
             } else {

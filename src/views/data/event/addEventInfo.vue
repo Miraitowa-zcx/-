@@ -65,8 +65,8 @@ export default {
     save() {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
-          request.post('/Event/save', this.form).then(res => {
-            if (res.code === 1) {
+          request.post('/event/save', this.form).then(res => {
+            if (res.code === '200') {
               this.$notify.success('新增成功')
               this.form = {}
             } else {

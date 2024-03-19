@@ -72,13 +72,12 @@ export default {
       this.load()
     },
     load() {
-      request.get('/Event/page', {
+      request.get('/event/page', {
         params: this.params
       }).then(res => {
-        if (res.code === 1) {
+        if (res.code === '200') {
           this.tableData = res.data.records
           this.total = res.data.total
-          console.log(this.tableData)
         }
       })
     },
@@ -91,8 +90,8 @@ export default {
       this.load()
     },
     del(id) {
-      request.delete("/Event/delete/" + id).then(res => {
-        if (res.code === 1) {
+      request.delete("/event/delete/" + id).then(res => {
+        if (res.code === '200') {
           this.$notify.success('删除成功')
           this.load()
         } else {
