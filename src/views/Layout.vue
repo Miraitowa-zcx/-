@@ -98,14 +98,17 @@
           </div>
         </el-header>
         <el-main>
-          <div style="min-height: calc(100vh - 160px); background-color: white; padding: 10px;">
+
+          <div style="min-height: calc(100vh - 160px); background-color: white; padding: 10px;" ref="vantaRef">
             <el-dialog :visible.sync="dialogVisible" width="50%" @close="handleDialogClose">
               <span>提示消息</span>
               <div v-if="messages">
                 <pre>{{ messages }}</pre>
               </div>
             </el-dialog>
-            <router-view/>
+            <el-row :style="{opacity: 0.9}">
+              <router-view/>
+            </el-row>
           </div>
         </el-main>
         <el-footer>
@@ -126,11 +129,14 @@
 <script>
 import Cookies from 'js-cookie'
 import 'element-ui/lib/theme-chalk/index.css';
+import * as THREE from 'three'
+import VantaClouds from "vanta/src/vanta.clouds";
 
 export default {
   name: 'LayoutPage',
   data() {
     return {
+      vantaEffect: null,
       socket: null,
       userId: '10',
       messages: null,
@@ -193,11 +199,66 @@ export default {
           console.log("websocket发生了错误");
         };
       }
-    }
+    },
+    initializeVanta() {
+      this.vantaEffect = VantaClouds({
+        mouseControls: false,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        speed: 0.40,
+        el: this.$refs.vantaRef,
+        THREE: THREE,
+      });
+    },
+    resetVanta() {
+      if (this.vantaEffect) {
+        this.destroyVanta();
+        setTimeout(() => {
+          this.$nextTick(() => {
+            this.initializeVanta();
+          });
+        }, 100)
+      }
+    },
+    destroyVanta() {
+      if (this.vantaEffect && this.vantaEffect.destroy) {
+        this.vantaEffect.destroy();
+        this.vantaEffect = null;
+      }
+    },
+  },
+  beforeDestroy() {
+    this.destroyVanta();
   },
   mounted() {
     this.openSocket()
+    this.initializeVanta();
+    // this.vantaEffect = VantaClouds({
+    //   mouseControls: false,
+    //   touchControls: true,
+    //   gyroControls: false,
+    //   minHeight: 200.00,
+    //   minWidth: 200.00,
+    //   speed: 0.40,
+    //   el: this.$refs.vantaRef,
+    //   THREE: THREE,
+    // })
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.resetVanta();
+    next();
+  },
+  beforeRouteLeave(to, from, next) {
+    this.destroyVanta();
+    next();
   }
+  // beforeDestroy() {
+  //   if (this.vantaEffect) {
+  //     this.vantaEffect.destroy()
+  //   }
+  // }
 }
 </script>
 <style>
@@ -237,5 +298,14 @@ body > .el-container {
 
 .item {
   margin-right: 10px;
+}
+
+.vanta-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000;
 }
 </style>

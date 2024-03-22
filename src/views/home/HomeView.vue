@@ -49,10 +49,15 @@
 
             <!-- 意见反馈 -->
             <template v-else-if="cardType === 'feedback'">
-              <form action="#" method="post">
-                <textarea placeholder="请输入您的意见或建议..." rows="3"></textarea>
-                <button type="submit">提交反馈</button>
-              </form>
+              <el-form ref="feedbackForm" :model="feedbackForm" style="margin-bottom: 20px;">
+                <el-form-item prop="content">
+                  <el-input type="textarea" autosize maxrows="10" placeholder="请输入您的意见或建议..."
+                            v-model="feedbackForm.content"></el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-button type="primary" @click="submitFeedback">提交反馈</el-button>
+                </el-form-item>
+              </el-form>
             </template>
 
             <!-- 天气 -->
@@ -93,7 +98,10 @@ export default {
         calendar: '日历',
       },
       admin: Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : {},
-      homeCards: {}
+      homeCards: {},
+      feedbackForm: {
+        content: '',
+      },
     }
   },
   mounted() {
