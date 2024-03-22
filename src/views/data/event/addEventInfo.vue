@@ -14,7 +14,7 @@
           <el-input v-model="form.eventtype" placeholder="请输入事件类型"></el-input>
         </el-form-item>
         <el-form-item label="描述" prop="description">
-          <el-input id="input-textarea" maxlength="100" show-word-limit autosize type="textarea" :rows="2" v-model="form.description"
+          <el-input id="input-textarea" show-word-limit autosize type="textarea" :rows="2" v-model="form.description"
                     placeholder="请输入描述"></el-input>
         </el-form-item>
       </el-form>

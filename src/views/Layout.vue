@@ -9,7 +9,6 @@
           <el-menu :default-active="$route.path" router
                    class="el-menu-demo"
                    @open="handleOpen"
-                   @close="handleClose"
                    background-color="#545c64"
                    text-color="#fff"
                    active-text-color="#ffd04b"
@@ -20,7 +19,7 @@
             </el-menu-item>
 
             <el-submenu index="camera">
-              <template slot="title">
+              <template v-slot:title>
                 <i class="el-icon-video-camera"></i>
                 <span>摄像头管理</span>
               </template>
@@ -28,7 +27,7 @@
             </el-submenu>
 
             <el-submenu v-if="role === 'admin'" index="device">
-              <template slot="title">
+              <template v-slot:title>
                 <i class="el-icon-info"></i>
                 <span>设备数据</span>
               </template>
@@ -37,7 +36,7 @@
             </el-submenu>
 
             <el-submenu v-if="role === 'admin'" index="event">
-              <template slot="title">
+              <template v-slot:title>
                 <i class="el-icon-s-claim"></i>
                 <span>事件数据</span>
               </template>
@@ -46,7 +45,7 @@
             </el-submenu>
 
             <el-submenu v-if="role === 'admin'" index="images">
-              <template slot="title">
+              <template v-slot:title>
                 <i class="el-icon-picture-outline"></i>
                 <span>图库</span>
               </template>
@@ -54,7 +53,7 @@
             </el-submenu>
 
             <el-submenu v-if="role === 'admin'" index="user">
-              <template slot="title">
+              <template v-slot:title>
                 <i class="el-icon-user"></i>
                 <span>用户管理</span>
               </template>
@@ -63,7 +62,7 @@
             </el-submenu>
 
             <el-submenu v-if="role === 'admin'" index="system">
-              <template slot="title">
+              <template v-slot:title>
                 <i class="el-icon-s-tools"></i>
                 <span>系统管理</span>
               </template>
@@ -86,7 +85,7 @@
                 {{ admin.username }}
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
-                <el-dropdown-menu slot="dropdown" style="margin-top: -10px">
+                <el-dropdown-menu slots:dropdown style="margin-top: -10px">
                   <el-dropdown-item>
                     <div style="width: 50px; text-align: center;" @click="logout">
                       退出
@@ -146,6 +145,17 @@ export default {
     }
   },
   methods: {
+    handleOpen() {
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+      setTimeout(() => {
+        loading.close();
+      }, 300)
+    },
     logout() {
       this.$notify.success('注销成功，即将跳转至登录页')
       // 清除浏览器用户数据

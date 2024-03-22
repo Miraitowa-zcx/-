@@ -51,8 +51,8 @@
             <template v-else-if="cardType === 'feedback'">
               <el-form ref="feedbackForm" :model="feedbackForm" style="margin-bottom: 20px;">
                 <el-form-item prop="content">
-                  <el-input type="textarea" autosize maxrows="10" placeholder="请输入您的意见或建议..."
-                            v-model="feedbackForm.content"></el-input>
+                  <el-input type="textarea" maxrows="10" placeholder="请输入您的意见或建议..."
+                            v-model="feedbackForm.content" style="height: 50px"></el-input>
                 </el-form-item>
                 <el-form-item>
                   <el-button type="primary" @click="submitFeedback">提交反馈</el-button>
