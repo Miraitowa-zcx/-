@@ -64,8 +64,9 @@
 
             <!-- 日历 -->
             <template v-else-if="cardType === 'calendar'">
-              <!-- 这里可以嵌入日历组件或者使用API获取并展示日期信息 -->
-              <div>今日日期及事件...</div>
+              <div class="content">
+                <Calendar ref="Calendar" agoDayHide="1530115221"/>
+              </div>
             </template>
           </div>
         </el-card>
@@ -76,6 +77,7 @@
 
 <script>
 import Cookies from "js-cookie";
+import Calendar from "vue-calendar-component";
 // import request from "@/utils/request";
 //import * as echarts from 'echarts';
 
@@ -100,6 +102,9 @@ export default {
   methods: {
     load() {
     }
+  },
+  components: {
+    Calendar
   }
 }
 </script>
@@ -141,5 +146,67 @@ img {
 
 .item {
   margin-bottom: 18px;
+}
+
+/deep/ .wh_content_item {
+  color: black;
+}
+
+/deep/ .wh_top_changge li {
+  color: black;
+}
+
+/deep/ .wh_jiantou1 {
+  border-top: 2px solid #030303;
+  border-left: 2px solid #030303;
+}
+
+/deep/ .wh_jiantou2 {
+  border-top: 2px solid #030303;
+  border-right: 2px solid #030303;
+}
+
+/deep/ .wh_jiantou1 {
+  background-color: white;
+}
+
+/deep/ .wh_content_all {
+  background-color: #ffffff
+}
+
+/deep/ .wh_content_item .wh_isToday {
+  background-color: #2b85e4
+}
+
+/deep/ .wh_content_item .wh_chose_day {
+  background-color: #9acafc;
+}
+
+h3 {
+  text-align: center;
+  width: 90%;
+  margin: auto;
+}
+
+.choseMonth-style {
+  width: 220px;
+  height: 44px;
+  line-height: 44px;
+  color: #fff;
+  font-size: 17px;
+  text-align: center;
+  margin: 20px auto auto;
+}
+
+.wh_container >>> .mark1 {
+  background-color: orange;
+}
+
+.wh_container >>> .mark2 {
+  background-color: blue;
+}
+
+.wh_content_item > .wh_isMark {
+  background: orange;
 }
 </style>
