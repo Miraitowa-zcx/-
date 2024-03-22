@@ -99,6 +99,12 @@
         </el-header>
         <el-main>
           <div style="min-height: calc(100vh - 160px); background-color: white; padding: 10px;">
+            <el-dialog :visible.sync="dialogVisible" width="50%" @close="handleDialogClose">
+              <span>提示消息</span>
+              <div v-if="messages">
+                <pre>{{ messages }}</pre>
+              </div>
+            </el-dialog>
             <router-view/>
           </div>
         </el-main>
@@ -119,12 +125,16 @@
 
 <script>
 import Cookies from 'js-cookie'
-import mouseMove from "@/components/mouseMove.vue"
+import 'element-ui/lib/theme-chalk/index.css';
 
 export default {
   name: 'LayoutPage',
   data() {
     return {
+      socket: null,
+      userId: '10',
+      messages: null,
+      dialogVisible: false,
       admin: Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : {},
       role: Cookies.get('role') ? JSON.parse(Cookies.get('role')) : {}
     }
@@ -145,10 +155,48 @@ export default {
       } else {
         this.$router.push('/')
       }
+    },
+    handleDialogClose() {
+      this.dialogVisible = false; // 关闭弹窗时重置状态
+    },
+    openSocket() {
+      if (typeof WebSocket === "undefined") {
+        console.log("您的浏览器不支持WebSocket");
+      } else {
+        console.log("您的浏览器支持WebSocket");
+
+        const socketUrl = `ws://localhost:8080/ws/${this.userId}`;
+        console.log(socketUrl);
+
+        if (this.socket && this.socket.readyState !== WebSocket.CLOSED) {
+          this.socket.close();
+          this.socket = null;
+        }
+
+        this.socket = new WebSocket(socketUrl);
+
+        this.socket.onopen = () => {
+          console.log("websocket已打开");
+        };
+
+        this.socket.onmessage = (msg) => {
+          this.$notify.success('收到消息')
+          this.messages = msg.data
+          this.dialogVisible = true
+        };
+
+        this.socket.onclose = () => {
+          console.log("websocket已关闭");
+        };
+
+        this.socket.onerror = () => {
+          console.log("websocket发生了错误");
+        };
+      }
     }
   },
-  components: {
-    mouseMove
+  mounted() {
+    this.openSocket()
   }
 }
 </script>

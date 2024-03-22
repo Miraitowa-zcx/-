@@ -72,9 +72,7 @@ export default {
       this.load()
     },
     load() {
-      request.get('/event/page', {
-        params: this.params
-      }).then(res => {
+      request.get('/event/page', {params: this.params}).then(res => {
         if (res.code === '200') {
           this.tableData = res.data.records
           this.total = res.data.total
