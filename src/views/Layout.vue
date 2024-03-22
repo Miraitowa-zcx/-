@@ -235,16 +235,6 @@ export default {
   mounted() {
     this.openSocket()
     this.initializeVanta();
-    // this.vantaEffect = VantaClouds({
-    //   mouseControls: false,
-    //   touchControls: true,
-    //   gyroControls: false,
-    //   minHeight: 200.00,
-    //   minWidth: 200.00,
-    //   speed: 0.40,
-    //   el: this.$refs.vantaRef,
-    //   THREE: THREE,
-    // })
   },
   beforeRouteUpdate(to, from, next) {
     this.resetVanta();
@@ -254,11 +244,6 @@ export default {
     this.destroyVanta();
     next();
   }
-  // beforeDestroy() {
-  //   if (this.vantaEffect) {
-  //     this.vantaEffect.destroy()
-  //   }
-  // }
 }
 </script>
 <style>
