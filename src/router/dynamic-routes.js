@@ -17,10 +17,10 @@ export default [
     {path: 'userManage', name: 'UserManage', component: () => import('@/views/user/userManage.vue')},
     {path: 'roleManage', name: 'RoleManage', component: () => import('@/views/user/roleManage.vue')},
 
-    // ===   图像管理  ===
-    {path: 'imagesList', name: 'ImagesList', component: () => import('@/views/images/imagesList.vue')},
+    // // ===   图像管理  ===
+    // {path: 'imagesList', name: 'ImagesList', component: () => import('@/views/images/imagesList.vue')},
 
     //  ===   系统管理  ===
     {path: 'systemMenu', name: 'SystemMenu', component: () => import('@/views/system/systemMenu.vue')},
-    {path: 'systemDictionary', name: 'SystemDictionary', component: () => import('@/views/system/systemDictionary.vue')}
+    // {path: 'systemDictionary', name: 'SystemDictionary', component: () => import('@/views/system/systemDictionary.vue')}
 ]

@@ -21,10 +21,18 @@
             <el-submenu index="camera">
               <template v-slot:title>
                 <i class="el-icon-video-camera"></i>
-                <span>摄像头管理</span>
+                <span>数据可视化</span>
               </template>
-              <el-menu-item index="/deviceList">实时播放</el-menu-item>
+              <el-menu-item index="/dataVisualization">数据大屏</el-menu-item>
             </el-submenu>
+
+<!--            <el-submenu index="camera">-->
+<!--              <template v-slot:title>-->
+<!--                <i class="el-icon-video-camera"></i>-->
+<!--                <span>摄像头管理</span>-->
+<!--              </template>-->
+<!--              <el-menu-item index="/deviceList">实时播放</el-menu-item>-->
+<!--            </el-submenu>-->
 
             <el-submenu v-if="role === 'admin'" index="device">
               <template v-slot:title>
@@ -44,13 +52,13 @@
               <el-menu-item index="/addEventInfo">事件添加</el-menu-item>
             </el-submenu>
 
-            <el-submenu v-if="role === 'admin'" index="images">
-              <template v-slot:title>
-                <i class="el-icon-picture-outline"></i>
-                <span>图库</span>
-              </template>
-              <el-menu-item index="/imagesList">图像列表</el-menu-item>
-            </el-submenu>
+<!--            <el-submenu v-if="role === 'admin'" index="images">-->
+<!--              <template v-slot:title>-->
+<!--                <i class="el-icon-picture-outline"></i>-->
+<!--                <span>图库</span>-->
+<!--              </template>-->
+<!--              <el-menu-item index="/imagesList">图像列表</el-menu-item>-->
+<!--            </el-submenu>-->
 
             <el-submenu v-if="role === 'admin'" index="user">
               <template v-slot:title>
@@ -66,8 +74,7 @@
                 <i class="el-icon-s-tools"></i>
                 <span>系统管理</span>
               </template>
-              <el-menu-item index="/systemMenu">系统菜单</el-menu-item>
-              <el-menu-item index="/systemDictionary">系统字典</el-menu-item>
+              <el-menu-item index="/systemMenu">公告管理</el-menu-item>
             </el-submenu>
           </el-menu>
         </div>

@@ -22,8 +22,11 @@ const routes = [
             //  ===   主页   ===
             {path: 'home', name: 'Home', component: () => import('@/views/home/HomeView.vue')},
 
-            // ====   摄像头管理   ====
-            {path: 'deviceList', name: 'DeviceList', component: () => import('@/views/camera/deviceList.vue')},
+            // // ====   摄像头管理   ====
+            // {path: 'deviceList', name: 'DeviceList', component: () => import('@/views/camera/deviceList.vue')},
+
+            // ===   数据可视化   ===
+            {path: 'dataVisualization', name: 'DataVisualization', component: () => import('@/views/data/visualization/visualization.vue')},
 
             // 动态加载路由
             ...dynamicRoutes

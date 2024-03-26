@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-row style="padding-top: 20px; padding-left: 20px">
-      <el-col :span="8" v-for="(o, index) in 3" :key="o" :offset="index = 0">
+    <el-row style="padding-top: 20px; padding-left: 50px">
+      <el-col :span="8" v-for="(msgInfo, index) in msgInfos" :key="index" :offset="index = 0">
         <el-card shadow="hover" style="max-width: 85%; height: 150px; display: flex;" :body-style="{ padding: '0px' }">
           <div style="display: flex;">
             <el-card class="card-container-left" shadow="never">
@@ -10,29 +10,41 @@
             <div class="card-container-right">
               <el-card style="height: 100%;" shadow="never">
                 <div slot="header">
-                  <span>名称</span>
+                  <span>{{ msgTitles[msgInfo] }}</span>
                 </div>
-                <div v-for="o in 4" :key="o" class="text item">
-                  {{ '列表内容 ' + o }}
+                <div class="text item">
+
+                  <!-- 事件信息 -->
+                  <template v-if="msgInfo === '2'">
+                    <p>姓名：张三</p>
+                    <p>职位：产品经理</p>
+                    <p>邮箱：zhangsan@example.com</p>
+                  </template>
+
+                  <!-- 个人信息 -->
+                  <template v-if="msgInfo === '1'">
+                    <p>姓名：张三</p>
+                    <p>职位：产品经理</p>
+                    <p>邮箱：zhangsan@example.com</p>
+                  </template>
+
+                  <!-- 个人信息 -->
+                  <template v-if="msgInfo === 'T_Info'">
+                    <p>姓名：张三</p>
+                    <p>职位：产品经理</p>
+                    <p>邮箱：zhangsan@example.com</p>
+                  </template>
                 </div>
               </el-card>
             </div>
           </div>
         </el-card>
       </el-col>
-      <el-col :span="6" v-for="(o, index) in 4" :key="o" :offset="index = 0" style="padding-top: 50px">
-        <el-card shadow="hover" style="max-width: 350px; height: 300px; text-align: center;"
-                 :body-style="{ padding: '1' }">
-          <div slot="header">
-            <span>名称</span>
-          </div>
-          <div v-for="o in 4" :key="o" class="text item">
-            {{ '列表内容 ' + o }}
-          </div>
-        </el-card>
+      <el-col :span="23" style="padding-top: 30px">
+        <GapDeMap></GapDeMap>
       </el-col>
       <el-col :span="6" v-for="(cardType, index) in cardTypes" :key="index" :offset="index === 0 ? 0 : null"
-              style="padding-top: 50px">
+              style="padding-top: 30px">
         <el-card shadow="hover" style="max-width: 350px; height: 350px; text-align: center;"
                  :body-style="{ padding: '1rem' }">
           <div slot="header">
@@ -51,7 +63,7 @@
             <template v-else-if="cardType === 'feedback'">
               <el-form ref="feedbackForm" :model="feedbackForm" style="margin-bottom: 20px;">
                 <el-form-item prop="content">
-                  <el-input type="textarea" maxrows="10" placeholder="请输入您的意见或建议..."
+                  <el-input type="textarea" autosize placeholder="请输入您的意见或建议..."
                             v-model="feedbackForm.content" style="height: 50px"></el-input>
                 </el-form-item>
                 <el-form-item>
@@ -81,8 +93,9 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import Calendar from "vue-calendar-component";
+import GapDeMap from "@/components/map/map.vue"
 // import request from "@/utils/request";
 //import * as echarts from 'echarts';
 
@@ -97,7 +110,12 @@ export default {
         weather: '实时天气',
         calendar: '日历',
       },
-      admin: Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : {},
+      msgInfos: ['eventInfo', 'feedback', 'weather'],
+      msgTitles: {
+        eventInfo: '事件信息',
+        feedback: 'xx',
+        weather: 'xx',
+      },
       homeCards: {},
       feedbackForm: {
         content: '',
@@ -112,7 +130,8 @@ export default {
     }
   },
   components: {
-    Calendar
+    Calendar,
+    GapDeMap
   }
 }
 </script>
@@ -218,3 +237,7 @@ h3 {
   background: orange;
 }
 </style>
+
+
+
+
