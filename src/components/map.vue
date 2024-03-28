@@ -23,8 +23,15 @@
         element-loading-background="rgba(25,81,135,0.7)"
         id="qyContainer">
     </div>
+
+    <!-- 视频弹窗 -->
+    <el-dialog title="实时视频" :visible.sync="dialogFormVisible" width="50%">
+      <video id="videoElement" controls autoplay style="min-width: 100%; min-height: 100%;" src="http://localhost:8080/putVideo"/>
+    </el-dialog>
+
   </div>
 </template>
+
 <script>
 // 引入地图插件
 import AMapLoader from '@amap/amap-jsapi-loader'
@@ -35,6 +42,7 @@ export default {
   name: "GapDeMap",
   data() {
     return {
+      dialogFormVisible: false,
       areaProps: { // 选择地区的属性
         value: 'value',
         label: 'label',
@@ -60,32 +68,38 @@ export default {
       securityJsCode: 'ed18d066ab8fe5549271db1b3219a02c'
       // 应用密钥概览：https://console.amap.com/dev/key/app
     }
+
     this.backList = [
       {
+        id: 1,
         name: '地址1', // 地址名称
         color: 0, // 点的颜色
         lat: 37.221236, // 经度
         lng: 116.234912 // 纬度
       },
       {
+        id: 2,
         name: '地址2',
         color: 1,
         lat: 37.194911,
         lng: 116.592917
       },
       {
+        id: 3,
         name: '地址3',
         color: 2,
         lat: 37.150751,
-        lng: 116.593329
+        lng: 116.593329,
       },
       {
+        id: 4,
         name: '地址4',
         color: 3,
         lat: 37.221245,
         lng: 116.265387
       },
       {
+        id: 5,
         name: '地址5',
         color: 4,
         lat: 37.207206,
@@ -180,8 +194,12 @@ export default {
       }
     },
     // 点击marker触发事件
-    clickMarkerHandler(item, event) {
-      console.log('点击标记点', item, event)
+    clickMarkerHandler(item) {
+      // console.log('点击标记点', item, event)
+      if (item.id) {
+        this.$message.success('点击了标记点')
+        this.dialogFormVisible = true
+      }
     }
   }
 }
@@ -190,8 +208,8 @@ export default {
 #qyContainer {
   padding: 0;
   margin: 0;
-  width: 99%;
-  height: 350px;
+  width: 100%;
+  height: 500px;
 }
 
 .circleMark {
